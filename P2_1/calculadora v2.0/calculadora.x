@@ -34,16 +34,19 @@ OPERACIONES:
 	Multiplicacion
 
 */
+
 typedef double m<>;
 
 struct matrix{
-    int fil;
-    int col;
-    m m;
+    int rows;
+    int cols;
+    m data;
 };
 
 struct vector3D{
-	int x, y, z;
+	int x;
+	int y;
+	int z;
 };
 
 program CALCULADORA {
@@ -74,7 +77,5 @@ program CALCULADORA {
 		matrix SUMAMATRICIAL(matrix, matrix) = 20;
         matrix RESTAMATRICIAL(matrix, matrix) = 21;
         matrix MULTMATRICIAL(matrix, matrix) = 22;
-		matrix TRASPUESTA(matrix) = 23;
-		matrix INVERSA(matrix) = 24;
 	}=1;
 } = 0x20000155;
