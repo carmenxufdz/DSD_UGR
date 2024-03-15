@@ -57,7 +57,7 @@ potencia_1_svc(int arg1, int arg2,  struct svc_req *rqstp)
 }
 
 double *
-raiz_1_svc(double arg1, int arg2,  struct svc_req *rqstp)
+raiz_1_svc(double arg1, double arg2,  struct svc_req *rqstp)
 {
 	static double  result;
 	result = pow(arg1,(1/arg2));

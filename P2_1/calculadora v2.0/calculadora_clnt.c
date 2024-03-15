@@ -112,7 +112,7 @@ potencia_1(int arg1, int arg2,  CLIENT *clnt)
 }
 
 double *
-raiz_1(double arg1, int arg2,  CLIENT *clnt)
+raiz_1(double arg1, double arg2,  CLIENT *clnt)
 {
 	raiz_1_argument arg;
 	static double clnt_res;

@@ -57,7 +57,7 @@ program CALCULADORA {
 		double DIVIDE(double,double) = 4;
 		int MODULO (int, int) = 5;
 		int POTENCIA (int, int) =6;
-		double RAIZ (double, int) = 7;
+		double RAIZ (double, double) = 7;
 		int FACTORIAL (int) = 8;
 		
 		double LOGARITMO(int, int) = 9;

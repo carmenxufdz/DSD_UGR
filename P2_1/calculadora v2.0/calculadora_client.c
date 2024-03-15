@@ -180,29 +180,29 @@ calculadora_1(char *host)
 							}
 						break;
 
-						case 7:	// Raiz 	NO FUNCIONA
+						case 7:	// Raiz
 							printf("Introduzca un numero: ");
 							scanf("%lf", &arg1_d);
 							printf("Introduzca la raiz (un numero entero positivo): ");
-							scanf("%d", &arg2_i);
+							scanf("%lf", &arg2_d);
 							printf("\n");
 
-							if(arg2_i <= 0)
+							if(arg2_d <= 0)
 							{
 								printf("La raiz debe ser un numero positivo diferent de 0\n\n");
 							}
-							else if((arg2_i % 2 == 0) && arg1_d < 0)
+							else if((((int)arg2_d) % 2 == 0) && arg1_d < 0)
 							{
-								printf("No se puede hacer la raiz %d de un numero negativo\n\n", arg2_i);
+								printf("No se puede hacer la raiz %f de un numero negativo\n\n", arg2_d);
 							}
 							else
 							{
-								result_d = raiz_1(arg1_d, arg2_i, clnt);
+								result_d = raiz_1(arg1_d, arg2_d, clnt);
 								if (result_d == (double *) NULL) {
 									clnt_perror (clnt, "call failed");
 								}
 								else{
-									printf("Resultado: %f ^ 1/%d = %f\n\n",arg1_d,arg2_i,*result_d);
+									printf("Resultado: %f ^ 1/%f = %f\n\n",arg1_d,arg2_d,*result_d);
 								}
 							}
 						break;

@@ -71,7 +71,7 @@ typedef struct potencia_1_argument potencia_1_argument;
 
 struct raiz_1_argument {
 	double arg1;
-	int arg2;
+	double arg2;
 };
 typedef struct raiz_1_argument raiz_1_argument;
 
@@ -152,8 +152,8 @@ extern  int * modulo_1_svc(int , int , struct svc_req *);
 extern  int * potencia_1(int , int , CLIENT *);
 extern  int * potencia_1_svc(int , int , struct svc_req *);
 #define RAIZ 7
-extern  double * raiz_1(double , int , CLIENT *);
-extern  double * raiz_1_svc(double , int , struct svc_req *);
+extern  double * raiz_1(double , double , CLIENT *);
+extern  double * raiz_1_svc(double , double , struct svc_req *);
 #define FACTORIAL 8
 extern  int * factorial_1(int , CLIENT *);
 extern  int * factorial_1_svc(int , struct svc_req *);
