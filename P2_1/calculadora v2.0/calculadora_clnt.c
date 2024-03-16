@@ -235,85 +235,130 @@ tangente_1(double arg1,  CLIENT *clnt)
 	return (&clnt_res);
 }
 
-vector3D *
-sumavectorial_1(vector3D arg1, vector3D arg2,  CLIENT *clnt)
+double *
+secante_1(double arg1,  CLIENT *clnt)
+{
+	static double clnt_res;
+
+	memset((char *)&clnt_res, 0, sizeof(clnt_res));
+	if (clnt_call (clnt, SECANTE,
+		(xdrproc_t) xdr_double, (caddr_t) &arg1,
+		(xdrproc_t) xdr_double, (caddr_t) &clnt_res,
+		TIMEOUT) != RPC_SUCCESS) {
+		return (NULL);
+	}
+	return (&clnt_res);
+}
+
+double *
+cosecante_1(double arg1,  CLIENT *clnt)
+{
+	static double clnt_res;
+
+	memset((char *)&clnt_res, 0, sizeof(clnt_res));
+	if (clnt_call (clnt, COSECANTE,
+		(xdrproc_t) xdr_double, (caddr_t) &arg1,
+		(xdrproc_t) xdr_double, (caddr_t) &clnt_res,
+		TIMEOUT) != RPC_SUCCESS) {
+		return (NULL);
+	}
+	return (&clnt_res);
+}
+
+double *
+cotangente_1(double arg1,  CLIENT *clnt)
+{
+	static double clnt_res;
+
+	memset((char *)&clnt_res, 0, sizeof(clnt_res));
+	if (clnt_call (clnt, COTANGENTE,
+		(xdrproc_t) xdr_double, (caddr_t) &arg1,
+		(xdrproc_t) xdr_double, (caddr_t) &clnt_res,
+		TIMEOUT) != RPC_SUCCESS) {
+		return (NULL);
+	}
+	return (&clnt_res);
+}
+
+v *
+sumavectorial_1(v arg1, v arg2,  CLIENT *clnt)
 {
 	sumavectorial_1_argument arg;
-	static vector3D clnt_res;
+	static v clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	arg.arg1 = arg1;
 	arg.arg2 = arg2;
 	if (clnt_call (clnt, SUMAVECTORIAL, (xdrproc_t) xdr_sumavectorial_1_argument, (caddr_t) &arg,
-		(xdrproc_t) xdr_vector3D, (caddr_t) &clnt_res,
+		(xdrproc_t) xdr_v, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
 }
 
-vector3D *
-restavectorial_1(vector3D arg1, vector3D arg2,  CLIENT *clnt)
+v *
+restavectorial_1(v arg1, v arg2,  CLIENT *clnt)
 {
 	restavectorial_1_argument arg;
-	static vector3D clnt_res;
+	static v clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	arg.arg1 = arg1;
 	arg.arg2 = arg2;
 	if (clnt_call (clnt, RESTAVECTORIAL, (xdrproc_t) xdr_restavectorial_1_argument, (caddr_t) &arg,
-		(xdrproc_t) xdr_vector3D, (caddr_t) &clnt_res,
+		(xdrproc_t) xdr_v, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
 }
 
-vector3D *
-multporescalar_1(vector3D arg1, int arg2,  CLIENT *clnt)
+v *
+multiplicaporescalar_1(v arg1, double arg2,  CLIENT *clnt)
 {
-	multporescalar_1_argument arg;
-	static vector3D clnt_res;
+	multiplicaporescalar_1_argument arg;
+	static v clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	arg.arg1 = arg1;
 	arg.arg2 = arg2;
-	if (clnt_call (clnt, MULTPORESCALAR, (xdrproc_t) xdr_multporescalar_1_argument, (caddr_t) &arg,
-		(xdrproc_t) xdr_vector3D, (caddr_t) &clnt_res,
+	if (clnt_call (clnt, MULTIPLICAPORESCALAR, (xdrproc_t) xdr_multiplicaporescalar_1_argument, (caddr_t) &arg,
+		(xdrproc_t) xdr_v, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
 }
 
-int *
-productoescalar_1(vector3D arg1, vector3D arg2,  CLIENT *clnt)
+double *
+productoescalar_1(v arg1, v arg2,  CLIENT *clnt)
 {
 	productoescalar_1_argument arg;
-	static int clnt_res;
+	static double clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	arg.arg1 = arg1;
 	arg.arg2 = arg2;
 	if (clnt_call (clnt, PRODUCTOESCALAR, (xdrproc_t) xdr_productoescalar_1_argument, (caddr_t) &arg,
-		(xdrproc_t) xdr_int, (caddr_t) &clnt_res,
+		(xdrproc_t) xdr_double, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
 	return (&clnt_res);
 }
 
-vector3D *
-productovectorial_1(vector3D arg1, vector3D arg2,  CLIENT *clnt)
+v *
+productovectorial_1(v arg1, v arg2,  CLIENT *clnt)
 {
 	productovectorial_1_argument arg;
-	static vector3D clnt_res;
+	static v clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 	arg.arg1 = arg1;
 	arg.arg2 = arg2;
 	if (clnt_call (clnt, PRODUCTOVECTORIAL, (xdrproc_t) xdr_productovectorial_1_argument, (caddr_t) &arg,
-		(xdrproc_t) xdr_vector3D, (caddr_t) &clnt_res,
+		(xdrproc_t) xdr_v, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}

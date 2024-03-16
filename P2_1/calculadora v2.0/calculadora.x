@@ -1,53 +1,53 @@
 /*
 CALCULADORA VERSION 2.0 COMPLETA
+
 OPERACIONES:
-	BÁSICAS:
-    Suma
-    Resta
-    Multiplicacion
-    Division
-	Módulo
-	Potencia
-	Raíz
-	Factorial
+	1.BÁSICAS:
+		1.1.Suma
+		1.2.Resta
+		1.3.Multiplicacion
+		1.4.Division
 
-	LOGARITMOS:
-	Logaritmo base X
-	Logaritmo neperiano
-	Logaritmo base 10
+	2.AVANZADAS:
+		2.1.Logaritmo base X
+		2.2.Logaritmo neperiano
+		2.3.Logaritmo base 10
+		2.4.Módulo
+		2.5.Potencia
+		2.6.Raíz
+		2.7.Factorial
 
-	TRIGONOMETRÍA:
-	Seno 
-	Coseno
-	Tangente
+	3.TRIGONOMETRÍA:
+		3.1.Seno 
+		3.2.Coseno
+		3.3.Tangente
+		3.4.Secante
+		3.5.Cosecante
+		3.6.Cotangente
 
-	VECTORES 3D:
-	Suma
-	Resta
-	Multiplicacion por Entero
-	Producto Escalar
-	Producto Vectorial
+	4.VECTORES:
+		4.1.Suma
+		4.2.Resta
+		4.3.Multiplicacion por Escalar
+		4.4.Producto Escalar
+		4.5.Producto Vectorial
 
-	MATRICES:
-	Suma
-	Resta
-	Multiplicacion
+	5.MATRICES:
+		5.1.Suma
+		5.2.Resta
+		5.3.Multiplicacion
 
 */
 
 typedef double m<>;
 
 struct matrix{
-    int rows;
-    int cols;
-    m data;
+    int fil;
+    int col;
+    m m;
 };
 
-struct vector3D{
-	int x;
-	int y;
-	int z;
-};
+typedef double v<>;
 
 program CALCULADORA {
 	version COMPLETA {
@@ -67,15 +67,18 @@ program CALCULADORA {
 		double SENO (double) = 12;
 		double COSENO (double) = 13;
 		double TANGENTE (double) = 14;
+		double SECANTE (double) = 15;
+		double COSECANTE (double) = 16;
+		double COTANGENTE (double) = 17;
 
-		vector3D SUMAVECTORIAL(vector3D, vector3D) = 15;
-		vector3D RESTAVECTORIAL(vector3D, vector3D) = 16;
-		vector3D MULTPORESCALAR(vector3D, int) = 17;
-		int PRODUCTOESCALAR(vector3D, vector3D) = 18;
-		vector3D PRODUCTOVECTORIAL(vector3D, vector3D) = 19;
+		v SUMAVECTORIAL(v, v) = 18;
+		v RESTAVECTORIAL(v, v) = 19;
+		v MULTIPLICAPORESCALAR(v, double) = 20;
+		double PRODUCTOESCALAR(v, v) = 21;
+		v PRODUCTOVECTORIAL(v, v) = 22;
 
-		matrix SUMAMATRICIAL(matrix, matrix) = 20;
-        matrix RESTAMATRICIAL(matrix, matrix) = 21;
-        matrix MULTMATRICIAL(matrix, matrix) = 22;
+		matrix SUMAMATRICIAL(matrix, matrix) = 23;
+        matrix RESTAMATRICIAL(matrix, matrix) = 24;
+        matrix MULTMATRICIAL(matrix, matrix) = 25;
 	}=1;
-} = 0x20000155;
+} = 0x2000001;

@@ -6,6 +6,9 @@
 
 #include "calculadora.h"
 #include <math.h>
+#include <string.h>
+#include <assert.h>
+#include <ctype.h>
 
 double *
 suma_1_svc(double arg1, double arg2,  struct svc_req *rqstp)
@@ -125,55 +128,118 @@ tangente_1_svc(double arg1,  struct svc_req *rqstp)
 {
 	static double  result;
 	double radian = arg1 * M_PI / 180;
-	result = tan(radian);
+	if(radian == (M_PI/2))
+	{
+		printf("Tangente = infinito\n");
+		result = -1;
+	}
+	else
+		result = tan(radian);
 	return &result;
 }
 
-vector3D *
-sumavectorial_1_svc(vector3D arg1, vector3D arg2,  struct svc_req *rqstp)
+double *
+cosecante_1_svc(double arg1,  struct svc_req *rqstp)
 {
-	static vector3D  result;
-	result.x = arg1.x + arg2.x;
-	result.y = arg1.y + arg2.y;
-	result.z = arg1.z + arg2.z;
+	static double  result;
+	double radian = arg1 * M_PI / 180;
+	result = 1/sin(radian);
 	return &result;
 }
 
-vector3D *
-restavectorial_1_svc(vector3D arg1, vector3D arg2,  struct svc_req *rqstp)
+double *
+secante_1_svc(double arg1,  struct svc_req *rqstp)
 {
-	static vector3D  result;
-	result.x = arg1.x - arg2.x;
-	result.y = arg1.y - arg2.y;
-	result.z = arg1.z - arg2.z;
+	static double  result;
+	double radian = arg1 * M_PI / 180;
+	result = 1/cos(radian);
 	return &result;
 }
 
-vector3D *
-multporescalar_1_svc(vector3D arg1, int arg2,  struct svc_req *rqstp)
+double *
+cotangente_1_svc(double arg1,  struct svc_req *rqstp)
 {
-	static vector3D  result;
-	result.x = arg1.x * arg2;
-	result.y = arg1.y * arg2;
-	result.z = arg1.z * arg2;
+	static double  result;
+	double radian = arg1 * M_PI / 180;
+	if(radian == (M_PI/2))
+	{
+		printf("Tangente = infinito\n");
+		result = -1;
+	}
+	else
+		result = 1/tan(radian);
 	return &result;
 }
 
-int *
-productoescalar_1_svc(vector3D arg1, vector3D arg2,  struct svc_req *rqstp)
+v *
+sumavectorial_1_svc(v arg1, v arg2,  struct svc_req *rqstp)
 {
-	static int  result;
-	result = (arg1.x * arg2.x + arg1.y * arg2.y + arg1.z * arg2.z);
+	static v result;
+	xdr_free((xdrproc_t)xdr_double, result.v_val);
+	
+	result.v_len=arg1.v_len;
+	result.v_val=malloc(arg2.v_len*sizeof(int));
+
+	for(int i=0; i<arg1.v_len; i++)
+		result.v_val[i] = arg1.v_val[i] + arg2.v_val[i];
+
 	return &result;
 }
 
-vector3D *
-productovectorial_1_svc(vector3D arg1, vector3D arg2,  struct svc_req *rqstp)
+v *
+restavectorial_1_svc(v arg1, v arg2,  struct svc_req *rqstp)
 {
-	static vector3D  result;
-	result.x = (arg1.y * arg2.z) - (arg1.z * arg2.y);
-	result.y = (arg1.z * arg2.x) - (arg1.x * arg2.z);
-	result.z = (arg1.x * arg2.y) - (arg1.y * arg2.x);
+	static v result;
+	xdr_free((xdrproc_t)xdr_double, result.v_val);
+	
+	result.v_len=arg1.v_len;
+	result.v_val=malloc(arg2.v_len*sizeof(int));
+
+	for(int i=0; i<arg1.v_len; i++)
+		result.v_val[i] = arg1.v_val[i] - arg2.v_val[i];
+
+	return &result;
+}
+
+v *
+multiplicaporescalar_1_svc(v arg1, double arg2,  struct svc_req *rqstp)
+{
+	static v result;
+	xdr_free((xdrproc_t)xdr_double, result.v_val);
+	
+	result.v_len=arg1.v_len;
+	result.v_val=malloc(arg1.v_len*sizeof(int));
+
+	for(int i=0; i<arg1.v_len; i++)
+		result.v_val[i] = arg1.v_val[i] * arg2;
+
+	return &result;
+}
+
+double *
+productoescalar_1_svc(v arg1, v arg2,  struct svc_req *rqstp)
+{
+	static double result;
+	
+	for(int i=0; i<arg1.v_len; i++)
+		result += arg1.v_val[i] * arg2.v_val[i];
+
+	return &result;
+}
+
+v *
+productovectorial_1_svc(v arg1, v arg2,  struct svc_req *rqstp)
+{
+	static v result;
+	xdr_free((xdrproc_t)xdr_double, result.v_val);
+	
+	result.v_len=arg1.v_len;
+	result.v_val=malloc(arg2.v_len*sizeof(int));
+
+	result.v_val[0] = arg1.v_val[1]*arg2.v_val[2] - arg1.v_val[2]*arg2.v_val[1];
+	result.v_val[1] = arg1.v_val[2]*arg2.v_val[0] - arg1.v_val[0]*arg2.v_val[2];
+	result.v_val[2] = arg1.v_val[0]*arg2.v_val[1] - arg1.v_val[1]*arg2.v_val[0];
+
 	return &result;
 }
 
@@ -181,6 +247,18 @@ matrix *
 sumamatricial_1_svc(matrix arg1, matrix arg2,  struct svc_req *rqstp)
 {
 	static matrix  result;
+	xdr_free((xdrproc_t)xdr_double, result.m.m_val);
+	result.m.m_len=0;
+
+	result.fil=arg1.fil;
+	result.col=arg1.col;
+
+	result.m.m_val=calloc(result.fil*result.col, sizeof(double));
+	result.m.m_len=result.fil*result.col;
+
+	for(int i=0; i<arg1.fil; i++)
+		for(int j=0; j<arg1.col; j++)
+			result.m.m_val[i*result.col+j]=arg1.m.m_val[i*result.col+j]+arg2.m.m_val[i*result.col+j];
 
 	return &result;
 }
@@ -189,7 +267,18 @@ matrix *
 restamatricial_1_svc(matrix arg1, matrix arg2,  struct svc_req *rqstp)
 {
 	static matrix  result;
+	xdr_free((xdrproc_t)xdr_double, result.m.m_val);
+	result.m.m_len=0;
 
+	result.fil=arg1.fil;
+	result.col=arg1.col;
+
+	result.m.m_val=calloc(result.fil*result.col, sizeof(double));
+	result.m.m_len=result.fil*result.col;
+
+	for(int i=0; i<arg1.fil; i++)
+		for(int j=0; j<arg1.col; j++)
+			result.m.m_val[i*result.col+j]=arg1.m.m_val[i*result.col+j]-arg2.m.m_val[i*result.col+j];
 	return &result;
 }
 
@@ -197,6 +286,23 @@ matrix *
 multmatricial_1_svc(matrix arg1, matrix arg2,  struct svc_req *rqstp)
 {
 	static matrix  result;
+	xdr_free((xdrproc_t)xdr_double, result.m.m_val);
+	result.m.m_len=0;
 
+	result.fil=arg1.fil;
+	result.col=arg2.col;
+
+	result.m.m_val=calloc(result.fil*result.col, sizeof(double));
+	result.m.m_len=result.fil*result.col;
+
+
+	for(int i=0; i<result.fil; i++)
+		for(int j=0; j<result.col; j++)
+			result.m.m_val[i*result.col+j]=0;
+
+	for(int i=0; i<arg1.fil; i++)
+		for(int j=0; j<arg2.col; j++)
+			for(int k=0; k<arg1.col; k++)
+				result.m.m_val[i*result.col+j]+=arg1.m.m_val[i*arg1.col+k]*arg2.m.m_val[k*arg2.col+j];
 	return &result;
 }

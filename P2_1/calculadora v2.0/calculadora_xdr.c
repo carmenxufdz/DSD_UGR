@@ -21,25 +21,22 @@ xdr_matrix (XDR *xdrs, matrix *objp)
 {
 	register int32_t *buf;
 
-	 if (!xdr_int (xdrs, &objp->rows))
+	 if (!xdr_int (xdrs, &objp->fil))
 		 return FALSE;
-	 if (!xdr_int (xdrs, &objp->cols))
+	 if (!xdr_int (xdrs, &objp->col))
 		 return FALSE;
-	 if (!xdr_m (xdrs, &objp->data))
+	 if (!xdr_m (xdrs, &objp->m))
 		 return FALSE;
 	return TRUE;
 }
 
 bool_t
-xdr_vector3D (XDR *xdrs, vector3D *objp)
+xdr_v (XDR *xdrs, v *objp)
 {
 	register int32_t *buf;
 
-	 if (!xdr_int (xdrs, &objp->x))
-		 return FALSE;
-	 if (!xdr_int (xdrs, &objp->y))
-		 return FALSE;
-	 if (!xdr_int (xdrs, &objp->z))
+	 if (!xdr_array (xdrs, (char **)&objp->v_val, (u_int *) &objp->v_len, ~0,
+		sizeof (double), (xdrproc_t) xdr_double))
 		 return FALSE;
 	return TRUE;
 }
@@ -127,9 +124,9 @@ xdr_logaritmo_1_argument (XDR *xdrs, logaritmo_1_argument *objp)
 bool_t
 xdr_sumavectorial_1_argument (XDR *xdrs, sumavectorial_1_argument *objp)
 {
-	 if (!xdr_vector3D (xdrs, &objp->arg1))
+	 if (!xdr_v (xdrs, &objp->arg1))
 		 return FALSE;
-	 if (!xdr_vector3D (xdrs, &objp->arg2))
+	 if (!xdr_v (xdrs, &objp->arg2))
 		 return FALSE;
 	return TRUE;
 }
@@ -137,19 +134,19 @@ xdr_sumavectorial_1_argument (XDR *xdrs, sumavectorial_1_argument *objp)
 bool_t
 xdr_restavectorial_1_argument (XDR *xdrs, restavectorial_1_argument *objp)
 {
-	 if (!xdr_vector3D (xdrs, &objp->arg1))
+	 if (!xdr_v (xdrs, &objp->arg1))
 		 return FALSE;
-	 if (!xdr_vector3D (xdrs, &objp->arg2))
+	 if (!xdr_v (xdrs, &objp->arg2))
 		 return FALSE;
 	return TRUE;
 }
 
 bool_t
-xdr_multporescalar_1_argument (XDR *xdrs, multporescalar_1_argument *objp)
+xdr_multiplicaporescalar_1_argument (XDR *xdrs, multiplicaporescalar_1_argument *objp)
 {
-	 if (!xdr_vector3D (xdrs, &objp->arg1))
+	 if (!xdr_v (xdrs, &objp->arg1))
 		 return FALSE;
-	 if (!xdr_int (xdrs, &objp->arg2))
+	 if (!xdr_double (xdrs, &objp->arg2))
 		 return FALSE;
 	return TRUE;
 }
@@ -157,9 +154,9 @@ xdr_multporescalar_1_argument (XDR *xdrs, multporescalar_1_argument *objp)
 bool_t
 xdr_productoescalar_1_argument (XDR *xdrs, productoescalar_1_argument *objp)
 {
-	 if (!xdr_vector3D (xdrs, &objp->arg1))
+	 if (!xdr_v (xdrs, &objp->arg1))
 		 return FALSE;
-	 if (!xdr_vector3D (xdrs, &objp->arg2))
+	 if (!xdr_v (xdrs, &objp->arg2))
 		 return FALSE;
 	return TRUE;
 }
@@ -167,9 +164,9 @@ xdr_productoescalar_1_argument (XDR *xdrs, productoescalar_1_argument *objp)
 bool_t
 xdr_productovectorial_1_argument (XDR *xdrs, productovectorial_1_argument *objp)
 {
-	 if (!xdr_vector3D (xdrs, &objp->arg1))
+	 if (!xdr_v (xdrs, &objp->arg1))
 		 return FALSE;
-	 if (!xdr_vector3D (xdrs, &objp->arg2))
+	 if (!xdr_v (xdrs, &objp->arg2))
 		 return FALSE;
 	return TRUE;
 }

@@ -100,31 +100,49 @@ _tangente_1 (double  *argp, struct svc_req *rqstp)
 	return (tangente_1_svc(*argp, rqstp));
 }
 
-static vector3D *
+static double *
+_secante_1 (double  *argp, struct svc_req *rqstp)
+{
+	return (secante_1_svc(*argp, rqstp));
+}
+
+static double *
+_cosecante_1 (double  *argp, struct svc_req *rqstp)
+{
+	return (cosecante_1_svc(*argp, rqstp));
+}
+
+static double *
+_cotangente_1 (double  *argp, struct svc_req *rqstp)
+{
+	return (cotangente_1_svc(*argp, rqstp));
+}
+
+static v *
 _sumavectorial_1 (sumavectorial_1_argument *argp, struct svc_req *rqstp)
 {
 	return (sumavectorial_1_svc(argp->arg1, argp->arg2, rqstp));
 }
 
-static vector3D *
+static v *
 _restavectorial_1 (restavectorial_1_argument *argp, struct svc_req *rqstp)
 {
 	return (restavectorial_1_svc(argp->arg1, argp->arg2, rqstp));
 }
 
-static vector3D *
-_multporescalar_1 (multporescalar_1_argument *argp, struct svc_req *rqstp)
+static v *
+_multiplicaporescalar_1 (multiplicaporescalar_1_argument *argp, struct svc_req *rqstp)
 {
-	return (multporescalar_1_svc(argp->arg1, argp->arg2, rqstp));
+	return (multiplicaporescalar_1_svc(argp->arg1, argp->arg2, rqstp));
 }
 
-static int *
+static double *
 _productoescalar_1 (productoescalar_1_argument *argp, struct svc_req *rqstp)
 {
 	return (productoescalar_1_svc(argp->arg1, argp->arg2, rqstp));
 }
 
-static vector3D *
+static v *
 _productovectorial_1 (productovectorial_1_argument *argp, struct svc_req *rqstp)
 {
 	return (productovectorial_1_svc(argp->arg1, argp->arg2, rqstp));
@@ -166,9 +184,12 @@ calculadora_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		double seno_1_arg;
 		double coseno_1_arg;
 		double tangente_1_arg;
+		double secante_1_arg;
+		double cosecante_1_arg;
+		double cotangente_1_arg;
 		sumavectorial_1_argument sumavectorial_1_arg;
 		restavectorial_1_argument restavectorial_1_arg;
-		multporescalar_1_argument multporescalar_1_arg;
+		multiplicaporescalar_1_argument multiplicaporescalar_1_arg;
 		productoescalar_1_argument productoescalar_1_arg;
 		productovectorial_1_argument productovectorial_1_arg;
 		sumamatricial_1_argument sumamatricial_1_arg;
@@ -268,33 +289,51 @@ calculadora_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		local = (char *(*)(char *, struct svc_req *)) _tangente_1;
 		break;
 
+	case SECANTE:
+		_xdr_argument = (xdrproc_t) xdr_double;
+		_xdr_result = (xdrproc_t) xdr_double;
+		local = (char *(*)(char *, struct svc_req *)) _secante_1;
+		break;
+
+	case COSECANTE:
+		_xdr_argument = (xdrproc_t) xdr_double;
+		_xdr_result = (xdrproc_t) xdr_double;
+		local = (char *(*)(char *, struct svc_req *)) _cosecante_1;
+		break;
+
+	case COTANGENTE:
+		_xdr_argument = (xdrproc_t) xdr_double;
+		_xdr_result = (xdrproc_t) xdr_double;
+		local = (char *(*)(char *, struct svc_req *)) _cotangente_1;
+		break;
+
 	case SUMAVECTORIAL:
 		_xdr_argument = (xdrproc_t) xdr_sumavectorial_1_argument;
-		_xdr_result = (xdrproc_t) xdr_vector3D;
+		_xdr_result = (xdrproc_t) xdr_v;
 		local = (char *(*)(char *, struct svc_req *)) _sumavectorial_1;
 		break;
 
 	case RESTAVECTORIAL:
 		_xdr_argument = (xdrproc_t) xdr_restavectorial_1_argument;
-		_xdr_result = (xdrproc_t) xdr_vector3D;
+		_xdr_result = (xdrproc_t) xdr_v;
 		local = (char *(*)(char *, struct svc_req *)) _restavectorial_1;
 		break;
 
-	case MULTPORESCALAR:
-		_xdr_argument = (xdrproc_t) xdr_multporescalar_1_argument;
-		_xdr_result = (xdrproc_t) xdr_vector3D;
-		local = (char *(*)(char *, struct svc_req *)) _multporescalar_1;
+	case MULTIPLICAPORESCALAR:
+		_xdr_argument = (xdrproc_t) xdr_multiplicaporescalar_1_argument;
+		_xdr_result = (xdrproc_t) xdr_v;
+		local = (char *(*)(char *, struct svc_req *)) _multiplicaporescalar_1;
 		break;
 
 	case PRODUCTOESCALAR:
 		_xdr_argument = (xdrproc_t) xdr_productoescalar_1_argument;
-		_xdr_result = (xdrproc_t) xdr_int;
+		_xdr_result = (xdrproc_t) xdr_double;
 		local = (char *(*)(char *, struct svc_req *)) _productoescalar_1;
 		break;
 
 	case PRODUCTOVECTORIAL:
 		_xdr_argument = (xdrproc_t) xdr_productovectorial_1_argument;
-		_xdr_result = (xdrproc_t) xdr_vector3D;
+		_xdr_result = (xdrproc_t) xdr_v;
 		local = (char *(*)(char *, struct svc_req *)) _productovectorial_1;
 		break;
 

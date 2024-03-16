@@ -20,18 +20,16 @@ typedef struct {
 } m;
 
 struct matrix {
-	int rows;
-	int cols;
-	m data;
+	int fil;
+	int col;
+	m m;
 };
 typedef struct matrix matrix;
 
-struct vector3D {
-	int x;
-	int y;
-	int z;
-};
-typedef struct vector3D vector3D;
+typedef struct {
+	u_int v_len;
+	double *v_val;
+} v;
 
 struct suma_1_argument {
 	double arg1;
@@ -82,32 +80,32 @@ struct logaritmo_1_argument {
 typedef struct logaritmo_1_argument logaritmo_1_argument;
 
 struct sumavectorial_1_argument {
-	vector3D arg1;
-	vector3D arg2;
+	v arg1;
+	v arg2;
 };
 typedef struct sumavectorial_1_argument sumavectorial_1_argument;
 
 struct restavectorial_1_argument {
-	vector3D arg1;
-	vector3D arg2;
+	v arg1;
+	v arg2;
 };
 typedef struct restavectorial_1_argument restavectorial_1_argument;
 
-struct multporescalar_1_argument {
-	vector3D arg1;
-	int arg2;
+struct multiplicaporescalar_1_argument {
+	v arg1;
+	double arg2;
 };
-typedef struct multporescalar_1_argument multporescalar_1_argument;
+typedef struct multiplicaporescalar_1_argument multiplicaporescalar_1_argument;
 
 struct productoescalar_1_argument {
-	vector3D arg1;
-	vector3D arg2;
+	v arg1;
+	v arg2;
 };
 typedef struct productoescalar_1_argument productoescalar_1_argument;
 
 struct productovectorial_1_argument {
-	vector3D arg1;
-	vector3D arg2;
+	v arg1;
+	v arg2;
 };
 typedef struct productovectorial_1_argument productovectorial_1_argument;
 
@@ -129,7 +127,7 @@ struct multmatricial_1_argument {
 };
 typedef struct multmatricial_1_argument multmatricial_1_argument;
 
-#define CALCULADORA 0x20000155
+#define CALCULADORA 0x2000001
 #define COMPLETA 1
 
 #if defined(__STDC__) || defined(__cplusplus)
@@ -175,28 +173,37 @@ extern  double * coseno_1_svc(double , struct svc_req *);
 #define TANGENTE 14
 extern  double * tangente_1(double , CLIENT *);
 extern  double * tangente_1_svc(double , struct svc_req *);
-#define SUMAVECTORIAL 15
-extern  vector3D * sumavectorial_1(vector3D , vector3D , CLIENT *);
-extern  vector3D * sumavectorial_1_svc(vector3D , vector3D , struct svc_req *);
-#define RESTAVECTORIAL 16
-extern  vector3D * restavectorial_1(vector3D , vector3D , CLIENT *);
-extern  vector3D * restavectorial_1_svc(vector3D , vector3D , struct svc_req *);
-#define MULTPORESCALAR 17
-extern  vector3D * multporescalar_1(vector3D , int , CLIENT *);
-extern  vector3D * multporescalar_1_svc(vector3D , int , struct svc_req *);
-#define PRODUCTOESCALAR 18
-extern  int * productoescalar_1(vector3D , vector3D , CLIENT *);
-extern  int * productoescalar_1_svc(vector3D , vector3D , struct svc_req *);
-#define PRODUCTOVECTORIAL 19
-extern  vector3D * productovectorial_1(vector3D , vector3D , CLIENT *);
-extern  vector3D * productovectorial_1_svc(vector3D , vector3D , struct svc_req *);
-#define SUMAMATRICIAL 20
+#define SECANTE 15
+extern  double * secante_1(double , CLIENT *);
+extern  double * secante_1_svc(double , struct svc_req *);
+#define COSECANTE 16
+extern  double * cosecante_1(double , CLIENT *);
+extern  double * cosecante_1_svc(double , struct svc_req *);
+#define COTANGENTE 17
+extern  double * cotangente_1(double , CLIENT *);
+extern  double * cotangente_1_svc(double , struct svc_req *);
+#define SUMAVECTORIAL 18
+extern  v * sumavectorial_1(v , v , CLIENT *);
+extern  v * sumavectorial_1_svc(v , v , struct svc_req *);
+#define RESTAVECTORIAL 19
+extern  v * restavectorial_1(v , v , CLIENT *);
+extern  v * restavectorial_1_svc(v , v , struct svc_req *);
+#define MULTIPLICAPORESCALAR 20
+extern  v * multiplicaporescalar_1(v , double , CLIENT *);
+extern  v * multiplicaporescalar_1_svc(v , double , struct svc_req *);
+#define PRODUCTOESCALAR 21
+extern  double * productoescalar_1(v , v , CLIENT *);
+extern  double * productoescalar_1_svc(v , v , struct svc_req *);
+#define PRODUCTOVECTORIAL 22
+extern  v * productovectorial_1(v , v , CLIENT *);
+extern  v * productovectorial_1_svc(v , v , struct svc_req *);
+#define SUMAMATRICIAL 23
 extern  matrix * sumamatricial_1(matrix , matrix , CLIENT *);
 extern  matrix * sumamatricial_1_svc(matrix , matrix , struct svc_req *);
-#define RESTAMATRICIAL 21
+#define RESTAMATRICIAL 24
 extern  matrix * restamatricial_1(matrix , matrix , CLIENT *);
 extern  matrix * restamatricial_1_svc(matrix , matrix , struct svc_req *);
-#define MULTMATRICIAL 22
+#define MULTMATRICIAL 25
 extern  matrix * multmatricial_1(matrix , matrix , CLIENT *);
 extern  matrix * multmatricial_1_svc(matrix , matrix , struct svc_req *);
 extern int calculadora_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
@@ -244,28 +251,37 @@ extern  double * coseno_1_svc();
 #define TANGENTE 14
 extern  double * tangente_1();
 extern  double * tangente_1_svc();
-#define SUMAVECTORIAL 15
-extern  vector3D * sumavectorial_1();
-extern  vector3D * sumavectorial_1_svc();
-#define RESTAVECTORIAL 16
-extern  vector3D * restavectorial_1();
-extern  vector3D * restavectorial_1_svc();
-#define MULTPORESCALAR 17
-extern  vector3D * multporescalar_1();
-extern  vector3D * multporescalar_1_svc();
-#define PRODUCTOESCALAR 18
-extern  int * productoescalar_1();
-extern  int * productoescalar_1_svc();
-#define PRODUCTOVECTORIAL 19
-extern  vector3D * productovectorial_1();
-extern  vector3D * productovectorial_1_svc();
-#define SUMAMATRICIAL 20
+#define SECANTE 15
+extern  double * secante_1();
+extern  double * secante_1_svc();
+#define COSECANTE 16
+extern  double * cosecante_1();
+extern  double * cosecante_1_svc();
+#define COTANGENTE 17
+extern  double * cotangente_1();
+extern  double * cotangente_1_svc();
+#define SUMAVECTORIAL 18
+extern  v * sumavectorial_1();
+extern  v * sumavectorial_1_svc();
+#define RESTAVECTORIAL 19
+extern  v * restavectorial_1();
+extern  v * restavectorial_1_svc();
+#define MULTIPLICAPORESCALAR 20
+extern  v * multiplicaporescalar_1();
+extern  v * multiplicaporescalar_1_svc();
+#define PRODUCTOESCALAR 21
+extern  double * productoescalar_1();
+extern  double * productoescalar_1_svc();
+#define PRODUCTOVECTORIAL 22
+extern  v * productovectorial_1();
+extern  v * productovectorial_1_svc();
+#define SUMAMATRICIAL 23
 extern  matrix * sumamatricial_1();
 extern  matrix * sumamatricial_1_svc();
-#define RESTAMATRICIAL 21
+#define RESTAMATRICIAL 24
 extern  matrix * restamatricial_1();
 extern  matrix * restamatricial_1_svc();
-#define MULTMATRICIAL 22
+#define MULTMATRICIAL 25
 extern  matrix * multmatricial_1();
 extern  matrix * multmatricial_1_svc();
 extern int calculadora_1_freeresult ();
@@ -276,7 +292,7 @@ extern int calculadora_1_freeresult ();
 #if defined(__STDC__) || defined(__cplusplus)
 extern  bool_t xdr_m (XDR *, m*);
 extern  bool_t xdr_matrix (XDR *, matrix*);
-extern  bool_t xdr_vector3D (XDR *, vector3D*);
+extern  bool_t xdr_v (XDR *, v*);
 extern  bool_t xdr_suma_1_argument (XDR *, suma_1_argument*);
 extern  bool_t xdr_resta_1_argument (XDR *, resta_1_argument*);
 extern  bool_t xdr_multiplica_1_argument (XDR *, multiplica_1_argument*);
@@ -287,7 +303,7 @@ extern  bool_t xdr_raiz_1_argument (XDR *, raiz_1_argument*);
 extern  bool_t xdr_logaritmo_1_argument (XDR *, logaritmo_1_argument*);
 extern  bool_t xdr_sumavectorial_1_argument (XDR *, sumavectorial_1_argument*);
 extern  bool_t xdr_restavectorial_1_argument (XDR *, restavectorial_1_argument*);
-extern  bool_t xdr_multporescalar_1_argument (XDR *, multporescalar_1_argument*);
+extern  bool_t xdr_multiplicaporescalar_1_argument (XDR *, multiplicaporescalar_1_argument*);
 extern  bool_t xdr_productoescalar_1_argument (XDR *, productoescalar_1_argument*);
 extern  bool_t xdr_productovectorial_1_argument (XDR *, productovectorial_1_argument*);
 extern  bool_t xdr_sumamatricial_1_argument (XDR *, sumamatricial_1_argument*);
@@ -297,7 +313,7 @@ extern  bool_t xdr_multmatricial_1_argument (XDR *, multmatricial_1_argument*);
 #else /* K&R C */
 extern bool_t xdr_m ();
 extern bool_t xdr_matrix ();
-extern bool_t xdr_vector3D ();
+extern bool_t xdr_v ();
 extern bool_t xdr_suma_1_argument ();
 extern bool_t xdr_resta_1_argument ();
 extern bool_t xdr_multiplica_1_argument ();
@@ -308,7 +324,7 @@ extern bool_t xdr_raiz_1_argument ();
 extern bool_t xdr_logaritmo_1_argument ();
 extern bool_t xdr_sumavectorial_1_argument ();
 extern bool_t xdr_restavectorial_1_argument ();
-extern bool_t xdr_multporescalar_1_argument ();
+extern bool_t xdr_multiplicaporescalar_1_argument ();
 extern bool_t xdr_productoescalar_1_argument ();
 extern bool_t xdr_productovectorial_1_argument ();
 extern bool_t xdr_sumamatricial_1_argument ();
