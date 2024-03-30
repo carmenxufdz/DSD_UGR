@@ -372,7 +372,7 @@ calculadora_1(char *host)
 
 							if(arg2_d <= 0)
 							{
-								printf("La raiz debe ser un numero positivo diferent de 0\n\n");
+								printf("La raiz debe ser un numero positivo diferente de 0\n\n");
 							}
 							else if((((int)arg2_d) % 2 == 0) && arg1_d < 0)
 							{
