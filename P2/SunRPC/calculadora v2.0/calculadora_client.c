@@ -124,7 +124,7 @@ calculadora_1(char *host)
 		printf("\t4. Operaciones Vectoriales\n");
 		printf("\t5. Operaciones Matriciales\n");
 		printf("\t6. Salir del Programa\n");
-		scanf("%c", &opcion);
+		scanf(" %c", &opcion);
 		getchar();
 		printf("\n");
 
@@ -138,7 +138,7 @@ calculadora_1(char *host)
 					printf("\t3. Multiplicacion\n");
 					printf("\t4. Division\n");
 					printf("\t5. Volver al menu principal\n");
-					scanf("%c", &operacion);
+					scanf(" %c", &operacion);
 					getchar();
 					printf("\n");
 
@@ -244,7 +244,7 @@ calculadora_1(char *host)
 					printf("\t6. Raiz\n");
 					printf("\t7. Factorial\n");
 					printf("\t8. Volver al menu principal\n");
-					scanf("%c", &operacion);
+					scanf(" %c", &operacion);
 					getchar();
 					printf("\n");
 
@@ -429,7 +429,7 @@ calculadora_1(char *host)
 					printf("\t5. Secante\n");
 					printf("\t6. Cotangente\n");
 					printf("\t7. Volver al menu principal\n");
-					scanf("%c", &operacion);
+					scanf(" %c", &operacion);
 					getchar();
 					printf("\n");
 
@@ -551,7 +551,7 @@ calculadora_1(char *host)
 					printf("\t4. Producto Escalar\n");
 					printf("\t5. Producto Vectorial\n");
 					printf("\t6. Volver al menu principal\n");
-					scanf("%c", &operacion);
+					scanf(" %c", &operacion);
 					getchar();
 					printf("\n");
 
@@ -738,7 +738,7 @@ calculadora_1(char *host)
 					printf("\t2. Resta Matricial\n");
 					printf("\t3. Multiplicacion Matricial\n");
 					printf("\t4. Volver al menu principal\n");
-					scanf("%c", &operacion);
+					scanf(" %c", &operacion);
 					getchar();
 					printf("\n");
 
